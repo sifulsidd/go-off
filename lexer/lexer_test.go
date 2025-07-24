@@ -32,6 +32,8 @@ func TestNextToken(t *testing.T) {
 		tok := l.NextToken()
 
 		if tok.Type != tt.expectedType{
+			// %d is the i value, it is used for int values 
+			// %q will put the expected type and token type in quotes to make it readable 
 			t.Fatalf("tests[%d] - tokentype wrong. expected=%q, got=%q", i, tt.expectedType, tok.Type)
 		}
 		if tok.Literal != tt.expectedLiteral {
