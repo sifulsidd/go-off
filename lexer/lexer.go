@@ -34,12 +34,38 @@ func (l *Lexer) NextToken() token.Token {
 		tok.Literal = ""
 
 		tok.Type = token.EOF
+	
+	default:
+		// reads the whole string until it gets to end of string and sets tok.Literal to the string
+		if isLetter(l.ch) {
+			tok.Literal = l.readIdentifier()
+			return tok
+		} else {
+			tok = newToken(token.ILLEGAL, l.ch)
+		}
 	}
 
 	l.readChar()
 
 	return tok
 
+}
+
+// reads an identifier and keeps parsing until it reaches a non-letter character
+func (l *Lexer) readIdentifier() string {
+	position := l.position
+
+	for isLetter(l.ch){
+		l.readChar()
+	}
+	// this is basically returning two indexes to give us the substring that we need for the string values
+	return l.input[position:l.position]
+}
+
+// just checks whether given character is a string or not 
+func isLetter(ch byte) bool {
+	// essentially this line allows our lexer to parse a string and accept the values below provided A-Z a-z ? ! _ 
+	return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch == '_' || ch == '!' || ch == '?'
 }
 
 // look at current character under examination and return token depending on which character it is 
