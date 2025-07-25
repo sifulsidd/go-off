@@ -14,7 +14,20 @@ type Lexer struct {
 	ch byte // current character under examination
 }
 
+// create and run a new instance of Lexer
 func New(input string) *Lexer{
 	l := &Lexer{input: input}
 	return l
 }
+
+// gives us next character and advance our position in input string
+func (l *Lexer) readChar() {
+	if l.readPosition >= len(l.input) {
+		l.ch = 0 // sets l.ch to NUL, means end of input
+	} else {
+		l.ch = l.input[l.readPosition] // not end of input so continue to access next file
+	}
+	l.position = l.readPosition // position gets updated to the readPosition 
+	l.readPosition += 1 // readPostion always points to next position
+}
+
