@@ -3,6 +3,9 @@ package lexer
 import "go-work/token"
 
 func (l *Lexer) NextToken() token.Token {
+	// just an instance of a token value 
+	// we use token.Token because token helps us find the token package and then that struct
+	// if we had token in this packacge we could've just wrote "var tok Token"
 	var tok token.Token
 	
 	switch l.ch {
@@ -37,8 +40,12 @@ func (l *Lexer) NextToken() token.Token {
 	
 	default:
 		// reads the whole string until it gets to end of string and sets tok.Literal to the string
+		// first checks character by character
 		if isLetter(l.ch) {
+			// if it is a character, reads the whole thing until it is empty "fn" , "let", etc.
 			tok.Literal = l.readIdentifier()
+			// if a token is referencing a valid token, we return that value or we return IDENT
+			tok.Type = token.LookupIdent((tok.Literal))
 			return tok
 		} else {
 			tok = newToken(token.ILLEGAL, l.ch)
