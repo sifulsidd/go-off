@@ -8,6 +8,8 @@ func (l *Lexer) NextToken() token.Token {
 	// if we had token in this packacge we could've just wrote "var tok Token"
 	var tok token.Token
 	
+	l.skipWhitespace()
+
 	switch l.ch {
 	case '=':
 		tok = newToken(token.ASSIGN, l.ch)
@@ -46,6 +48,10 @@ func (l *Lexer) NextToken() token.Token {
 			tok.Literal = l.readIdentifier()
 			// if a token is referencing a valid token, we return that value or we return IDENT
 			tok.Type = token.LookupIdent((tok.Literal))
+			return tok
+		} else if isDigit(l.ch) { //basically checking if token is an integer or not 
+			tok.Type = token.INT
+			tok.Literal = l.readNumber()
 			return tok
 		} else {
 			tok = newToken(token.ILLEGAL, l.ch)
@@ -114,5 +120,26 @@ func (l *Lexer) readChar() {
 	l.readPosition += 1 // readPostion always points to next position
 }
 
+// basically skips any of the values we see below and if seen, moves onto the next character 
+func (l *Lexer) skipWhitespace() {
+	// checking space, tabs, newlines or carriage returns
+	for l.ch == ' ' || l.ch == '\t' || l.ch =='\n' || l.ch == '\r'{
+		l.readChar()
+	}
+}
 
+// essentially gives me only the values that make up an integer
+func (l *Lexer) readNumber() string {
+	position := l.position
+	for isDigit(l.ch){
+		l.readChar()
+	}
+	// position stores starting position and l.position is updated position 
+	return l.input[position:l.position]
+}
+
+// checks whether value is between 0 and 9 
+func isDigit(ch byte) bool {
+	return '0' <= ch && ch <= '9'
+}
 
