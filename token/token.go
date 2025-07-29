@@ -43,6 +43,12 @@ const (
 	// Keywords 
 	FUNCTION = "FUNCTION"
 	LET = "LET"
+	// Boolean keywords 
+	TRUE = "TRUE"
+	FALSE = "FALSE"
+	IF = "IF"
+	ELSE = "ELSE"
+	RETURN = "RETURN"
 
 	// Operators
 	BANG = "!"
@@ -55,7 +61,11 @@ const (
 var keywords = map[string]TokenType{
 	"fn" : FUNCTION,
 	"let": LET,
-
+	"true": TRUE, 
+	"false": FALSE,
+	"if": IF,
+	"else": ELSE,
+	"return": RETURN,
 }
 
 // checks if given identifier is actually a keyword or not, if it isn't return IDENT
