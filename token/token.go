@@ -27,6 +27,8 @@ const (
 
 	PLUS = "+"
 
+	MINUS = "-"
+
 	// Delimeters
 	COMMA = ","
 
