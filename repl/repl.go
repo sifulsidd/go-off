@@ -1,8 +1,7 @@
 package repl
 
 import (
-	"bufio"
-	"go/scanner"
+	"bufio" // scanner
 
 	"fmt"
 
