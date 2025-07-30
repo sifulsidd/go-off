@@ -13,3 +13,11 @@ When we see a *func (l *Lexer) methodName returnedValue* essentially what it's d
 Worked on the lexer, essentially it reads each character and determines what kind of value it contains. Whether it be an integer, keyword or even a symbol. We check it at each point and make sure it is reading what we are typing. Fully tested in TDD as well. 
 
 ### REPL (read, eval, print, loop)/Console ### 
+Starts off by >> and then reads your code
+the first for loop without and conditions is basically the same as a python while True loop
+*Start function:*
+- Takes the input we provide
+- loops until it is false
+- reads the input the scanner is provided, if empty just exits
+- if not empty we create a lexer and pass in the string we have
+- goes through whole string until it reaches "EOF" and returns that value each time 
