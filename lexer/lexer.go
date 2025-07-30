@@ -2,6 +2,16 @@ package lexer
 
 import "go-work/token"
 
+// essentially looks at the next character
+func (l *Lexer) peekChar() byte {
+	// if readPosition is passed the input then we return null or 0
+	if l.readPosition >= len(l.input) {
+		return 0
+	} else { // otherwise return the character that that position
+		return l.input[l.readPosition]
+	}
+}
+
 func (l *Lexer) NextToken() token.Token {
 	// just an instance of a token value
 	// we use token.Token because token helps us find the token package and then that struct
@@ -12,7 +22,19 @@ func (l *Lexer) NextToken() token.Token {
 
 	switch l.ch {
 	case '=':
-		tok = newToken(token.ASSIGN, l.ch)
+		// essentially checks next character is =
+		if l.peekChar() == '='{
+			// store current character in ch
+			ch := l.ch
+			// move over to next character
+			l.readChar()
+			// literal is going to be a string of '=' + '='
+			literal := string(ch) + string(l.ch)
+			tok = token.Token{Type: token.EQUALS, Literal: literal}
+		} else {
+			tok = newToken(token.ASSIGN, l.ch)
+		}
+		
 	
 	case '+':
 		tok = newToken(token.PLUS, l.ch)
@@ -21,7 +43,19 @@ func (l *Lexer) NextToken() token.Token {
 		tok = newToken(token.MINUS, l.ch)
 	
 	case '!':
-		tok = newToken(token.BANG, l.ch)
+		// same as '=' check but now doing for not equals
+		if l.peekChar() == '='{
+			// store current character in ch
+			ch := l.ch
+			// move over to next character
+			l.readChar()
+			// literal is going to be a string of '!' + '='
+			literal := string(ch) + string(l.ch)
+			tok = token.Token{Type: token.NOT_EQUALS, Literal: literal}
+		} else {
+			tok = newToken(token.BANG, l.ch)
+		}
+		
 	
 	case '/':
 		tok = newToken(token.SLASH, l.ch)

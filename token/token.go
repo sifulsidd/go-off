@@ -56,6 +56,9 @@ const (
 	SLASH = "/"
 	LT = "<"
 	GT = ">"
+
+	EQUALS = "=="
+	NOT_EQUALS = "!="
 )
 
 var keywords = map[string]TokenType{
