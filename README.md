@@ -12,7 +12,7 @@ When we see a *func (l *Lexer) methodName returnedValue* essentially what it's d
 ### Lexer ####
 Worked on the lexer, essentially it reads each character and determines what kind of value it contains. Whether it be an integer, keyword or even a symbol. We check it at each point and make sure it is reading what we are typing. Fully tested in TDD as well. 
 
-### REPL (read, eval, print, loop)/Console ### 
+#### REPL (read, eval, print, loop)/Console #### 
 Starts off by >> and then reads your code
 the first for loop without and conditions is basically the same as a python while True loop
 *Start function:*
@@ -21,3 +21,10 @@ the first for loop without and conditions is basically the same as a python whil
 - reads the input the scanner is provided, if empty just exits
 - if not empty we create a lexer and pass in the string we have
 - goes through whole string until it reaches "EOF" and returns that value each time 
+
+
+### Parser ### 
+Parser - turns input into a data structure that represents input
+Parsers take source code as an input and produce data structures which represents this source code
+
+*Context-free grammar(CFG)* - set of rules that describe how to form correct (valid according to syntax) sentences in a language
