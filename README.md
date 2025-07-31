@@ -28,3 +28,5 @@ Parser - turns input into a data structure that represents input
 Parsers take source code as an input and produce data structures which represents this source code
 
 *Context-free grammar(CFG)* - set of rules that describe how to form correct (valid according to syntax) sentences in a language
+
+Parser repeatedly advances tokens and checks current token to decide what to do next: either call another parsing function or throw an error.
