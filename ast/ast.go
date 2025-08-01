@@ -11,7 +11,7 @@ type Statement interface {
 	// basically inheriting Node, so Statement also has TokenLiteral() function in it
 	Node
 
-	statmentNode()
+	statementNode()
 }
 
 type Expression interface {
